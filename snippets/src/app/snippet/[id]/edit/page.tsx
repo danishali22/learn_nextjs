@@ -1,6 +1,5 @@
 import EditSnippetForm from "@/components/edit-snippet-form";
 import { prisma } from "@/lib/prisma";
-import { Editor } from "@monaco-editor/react";
 import React from "react";
 
 const SnippetEditPage = async ({params}: {params: Promise<{id: string}>}) => {

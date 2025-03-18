@@ -1,6 +1,7 @@
 "use server"
 
 import { prisma } from "@/lib/prisma"
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createSnippet(prevState: {message: string}, formData: FormData) {
@@ -22,10 +23,16 @@ export async function createSnippet(prevState: {message: string}, formData: Form
             }
         });
 
+        revalidatePath("/");
+
         // throw new Error("Oops something went wrong");
         
-    } catch (error: any) {
-        return {message: error.message}
+    } catch (error: unknown) {
+        if(error instanceof Error){
+            return { message: error.message }
+        } else {
+            return { message: "Some internel server error" }
+        }
     }
     
     redirect("/");   // only work for server component not work for client component
@@ -40,6 +47,7 @@ export const saveSnippet = async (id: number, code: string) => {
             code,
         }
     });
+    revalidatePath(`/snippet/${id}`);
     redirect(`/snippet/${id}`);
 }
 
@@ -49,5 +57,6 @@ export const deleteSnippet = async(id: number) => {
             id
         }
     });
+    revalidatePath("/");
     redirect("/");
 }
