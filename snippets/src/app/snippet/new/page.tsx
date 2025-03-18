@@ -1,31 +1,21 @@
-import React from 'react'
+"use client"
+
+import React, { useActionState } from 'react'
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from '@/components/ui/button';
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
-
-async function createSnippet(formData:FormData) {
-    "use server"
-    const title = formData.get("title") as string;
-    const code = formData.get("code") as string;
-
-    const snippet = await prisma.snippet.create({
-        data: {
-            title,
-            code,
-        }
-    });
-
-    console.log("Created snippet", snippet);
-    redirect("/");   // only work for server component not work for client component
-}
+import * as actions from "@/actions"
 
 
 const CreateSnippetPage = () => {
+
+  const [formStateData, xyz] = useActionState(actions.createSnippet, { message: "" });
+
   return (
-    <form action={createSnippet} className='space-y-5'>
+    <form action={xyz} className='space-y-5'>
       <div>
         <Label htmlFor='title'>Title</Label>
         <Input type='text' name="title" id="title" />
@@ -34,6 +24,7 @@ const CreateSnippetPage = () => {
         <Label htmlFor='code'>Code</Label>
         <Textarea name="code" id="code" />
       </div>
+      {formStateData.message && <div className='p-2 bg-red-400 border-2 border-red-500 text-white rounded-md mt-2'>{formStateData.message}</div>}
       <Button type='submit'>New</Button>
     </form>
   );
