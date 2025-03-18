@@ -19,7 +19,7 @@ export default async function Home() {
         </Link>
       </div>
       {snippets.map((snippet) => (
-        <div className="my-5 flex items-center justify-between bg-gray-200 p-2 rounded-md">
+        <div key={snippet.id} className="my-5 flex items-center justify-between bg-gray-200 p-2 rounded-md">
           <h1>{snippet.title}</h1>
           <Link href={`snippet/${snippet.id}`}>
             <Button className="cursor-pointer" variant={"link"}>View</Button>
