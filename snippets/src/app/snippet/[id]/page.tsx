@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { prisma } from '@/lib/prisma';
+import Link from 'next/link';
 import React from 'react'
 
 type SnippetDetailProps = {
@@ -22,11 +23,13 @@ const SnippetDetailPage : React.FC<SnippetDetailProps> = async ({params}) => {
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-xl">{snippet.title}</h1>
         <div className="flex items-center justify-between gap-2">
-          <Button>Edit</Button>
+          <Link href={`/snippet/${snippet.id}/edit`}>
+            <Button>Edit</Button>
+          </Link>
           <Button variant={"destructive"}>Delete</Button>
         </div>
       </div>
-      <pre className='p-3 bg-gray-200 rounded border-gray-200 mt-5'>
+      <pre className="p-3 bg-gray-200 rounded border-gray-200 mt-5">
         <code>{snippet.code}</code>
       </pre>
     </div>
