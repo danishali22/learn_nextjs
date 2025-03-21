@@ -1,24 +1,14 @@
-import { signIn } from "@/actions/sign-in";
-import { signOut } from "@/actions/sign-out";
-import { auth } from "@/auth";
-import { Button } from "@/components/ui/button";
+import CreateTopicForm from "@/components/topics/create-topic-form";
 
 export default async function Home() {
-  const session = await auth();
   return (
-    <div>
-      <h1>Home</h1>
-      <form action={signIn}>
-        <Button type="submit" className="ms-2 me-2">
-          Sign In
-        </Button>
-      </form>
-      <form action={signOut}>
-        <Button type="submit" className="ms-2">
-          Sign Out
-        </Button>
-      </form>
-      {session?.user && <div>{JSON.stringify(session.user)}</div>}
+    <div className="grid grid-cols-4 gap-4 p-4">
+      <div className="col-span-3">
+        <h1 className="text-xl font-bold">Home Page</h1>
+      </div>
+      <div>
+        <CreateTopicForm />
+      </div>
     </div>
   );
 }
