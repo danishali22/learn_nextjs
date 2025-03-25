@@ -12,7 +12,7 @@ import { signOut } from "@/actions/sign-out";
 const AuthHeader = () => {
   const session = useSession();
 
-//   if (!session.data?.user) return null;
+  if (session.status === "loading") return null;
 
   let authContent: React.ReactNode;
 

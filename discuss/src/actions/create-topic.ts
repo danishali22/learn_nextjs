@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import {z} from "zod";
 
 const createTopicSchema = z.object({
-    name: z.string().min(3).regex(/[a-z-]+$/, {message: "Must be lowercase letter without spaces"}),
+    name: z.string().min(3).regex(/^[a-z-]+$/, { message: "Must be lowercase letter without spaces" }),
     description: z.string().min(10)
 });
 

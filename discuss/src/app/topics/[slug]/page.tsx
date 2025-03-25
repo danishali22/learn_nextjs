@@ -1,8 +1,23 @@
+import CreatePostForm from '@/components/posts/create-post-form';
+import PostList from '@/components/posts/post-list';
 import React from 'react'
 
-const TopicShowPage = () => {
+type TopicShowPageProps = {
+  params: Promise<{slug: string}>
+}
+
+const TopicShowPage : React.FC<TopicShowPageProps> = async({params}) => {
+  const slug = (await params).slug;
   return (
-    <div>TopicShowPage</div>
+    <div className='grid grid-cols-4 gap-4 p-4'>
+      <div className='col-span-3'>
+        <h1>{slug}</h1>
+        <PostList />
+      </div>
+      <div>
+        <CreatePostForm slug={slug} />
+      </div>
+    </div>
   )
 }
 
