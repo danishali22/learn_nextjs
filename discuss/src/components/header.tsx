@@ -1,5 +1,5 @@
 import AuthHeader from './auth-header';
-import { Input } from './ui/input';
+import SearchInput from './search-input';
 
 const Header = async () => {
   return (
@@ -8,7 +8,7 @@ const Header = async () => {
         <h1 className="font-bold text-xl">Discuss</h1>
       </div>
       <div className="flex justify-center">
-        <Input type="text" placeholder="Search Post..." />
+        <SearchInput />
       </div>
       <div className="flex justify-end gap-2">
         <AuthHeader />
