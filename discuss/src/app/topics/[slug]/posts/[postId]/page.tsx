@@ -1,3 +1,4 @@
+import CommentShow from '@/components/comments/comment-show';
 import CreateCommentForm from '@/components/comments/create-comment-form';
 import PostShow from '@/components/posts/post-show';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,8 @@ const PostShowPage : React.FC<PostShowPageProps> = async({params}) => {
             </Button>
         </Link>
         <PostShow postId={postId} /> 
-        <CreateCommentForm />
+        <CreateCommentForm postId={postId} startOpen />
+        <CommentShow />
     </div>
   )
 }
