@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import AuthHeader from './auth-header';
 import SearchInput from './search-input';
 
@@ -8,7 +9,9 @@ const Header = async () => {
         <h1 className="font-bold text-xl">Discuss</h1>
       </div>
       <div className="flex justify-center">
-        <SearchInput />
+        <Suspense>
+          <SearchInput />
+        </Suspense>
       </div>
       <div className="flex justify-end gap-2">
         <AuthHeader />
